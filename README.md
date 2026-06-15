@@ -93,7 +93,7 @@ Line charts from mid-2024 to mid-2025 show that each island has a distinct seaso
 **3. Comparative Variance Analysis (ANOVA)**
 One-way ANOVA confirmed that baseline respiratory disease burden is statistically unequal across islands. Java carries a disproportionately high absolute burden compared to islands like Kalimantan, which makes equal national resource distribution an ineffective strategy.
 
-**4. Island-Stratified Predictive Modeling
+**4. Island-Stratified Predictive Modeling**
 The primary purpose of the island-stratified predictive model is to mathematically evaluate whether climatic variations—specifically average temperature (TAVG)—can serve as a reliable indicator for forecasting pneumonia case counts across different regions. By utilizing a Poisson regression framework tailored for count data, the model separates the fixed baseline healthcare burdens of each island (represented by the vertical gaps between the regression lines) from the actual environmental impact (represented by the slopes). This stratification reveals that environmental sensitivity is highly localized; for instance, while a drop in temperature is a strong predictor for rising pneumonia cases in Java, the remaining islands display a flat temperature "inelasticity," indicating that their disease transmission dynamics are driven by factors entirely independent of average temperature within this climate bracket. Ultimately, this allows public health officials to identify which regional populations are climatically vulnerable, proving that localized infrastructure and geographic baselines matter far more for resource allocation than uniform weather patterns.
 
 **5. PCA Clustering of Island Environmental-Health Profiles**
