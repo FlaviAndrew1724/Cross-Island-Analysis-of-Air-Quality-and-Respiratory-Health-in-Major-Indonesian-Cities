@@ -1,39 +1,106 @@
-# ici_template [This section can be removed in the submission version]
-This GitHub repository offers a template specifically designed to teach students how to write effective README.md files and create a well-organized file structure. The template provides clear instructions and examples, helping students to learn the basics of GitHub and how to create professional-looking repositories.
+# Cross-Island Analysis of Air Quality and Respiratory Health in Major Indonesian Cities
 
+**Team:** Angela 林佩璇 (111302055) · Bryan 陳福益 (111ZU1034) · Owen 傅宥景 (112703010) · Andrew 李育強 (112ZU1026)
 
-# Project Title
+---
 
-[Enter the title of your project]
+## Overview
 
-## Project Description
+Indonesia's unique geography spans highly urbanized zones and dense forested areas across thousands of islands. This project investigates how climate and air quality conditions relate to respiratory disease outcomes — specifically pneumonia and pulmonary tuberculosis — across five major islands: Java, Sumatra, Kalimantan, Sulawesi, and Papua. The goal is to determine whether regional environmental differences are significant enough to demand island-specific public health responses rather than a uniform national policy.
 
-[Enter a brief description of your project, including the data you used and the analytical methods you applied. Be sure to provide context for your project and explain why it is important.]
+---
 
-## Getting Started
+## Repository Structure
 
-[Provide instructions on how to get started with your project, including any necessary software or data. Include installation instructions and any prerequisites or dependencies that are required.]
+```
+├── data/
+│   └── FINAL_DATASET_.xlsx              # Dataset used for analysis
+├── R/
+│   └── Air_Quality_Data_Preparation.R   # Data cleaning and aggregation script
+├── analysis/
+│   └── Air_Quality_Health_Analysis.pdf  # Full analysis report and visualizations
+├── poster/
+│   └── Poster_big_data.png              # Academic poster presentation
+└── README.md
+```
 
-## File Structure
+---
 
-[Describe the file structure of your project, including how the files are organized and what each file contains. Be sure to explain the purpose of each file and how they are related to one another.]
+## Data
 
-## Analysis
+**Source:** [BMKG DataOnline](https://dataonline.bmkg.go.id/dataonline-home) (Badan Meteorologi, Klimatologi, dan Geofisika)
 
-[Describe your analysis methods and include any visualizations or graphics that you used to present your findings. Explain the insights that you gained from your analysis and how they relate to your research question or problem statement.]
+Daily meteorological observations from 29 cities across Indonesia, covering July 2024 to May 2026 (~20,000 records).
 
-## Results
+| Column | Description |
+|--------|-------------|
+| Province | Indonesian province |
+| City | Observation city |
+| Date | Date of observation |
+| TN | Minimum daily temperature (°C) |
+| TX | Maximum daily temperature (°C) |
+| TAVG | Average daily temperature (°C) |
+| SS | Sunshine duration (hours) |
 
-[Provide a summary of your findings and conclusions, including any recommendations or implications for future research. Be sure to explain how your results address your research question or problem statement.]
+**Island groupings used in this project:**
 
-## Contributors
+| Island | Cities |
+|--------|--------|
+| Java | Central Jakarta, North Jakarta, Sleman, Bandung, Bogor, Cirebon, Semarang, Cilacap, Surabaya, Malang, Tangerang, Denpasar |
+| Sumatra | Medan, Padang, Palembang, Pangkal Pinang, Tanjung Pinang, Batam |
+| Kalimantan | Banjarbaru, Banjarmasin, Tarakan |
+| Sulawesi | Manado, Makassar |
+| Papua | Ambon, Ternate, Jayapura, Sorong, Mataram, Kupang |
 
-[List the contributors to your project and describe their roles and responsibilities.]
+---
 
-## Acknowledgments
+## How to Run
 
-[Thank any individuals or organizations who provided support or assistance during your project, including funding sources or data providers.]
+Install the required R packages:
 
-## References
+```r
+install.packages(c("dplyr", "readxl", "ggplot2", "tidyverse", "lubridate"))
+```
 
-[List any references or resources that you used during your project, including data sources, analytical methods, and tools.]
+Open `Air_Quality_Data_Preparation.R` and update the file paths to match your local setup:
+
+```r
+health_data <- read_excel("your/path/to/Health Dataset.xlsx")
+air_data    <- read_excel("your/path/to/FINAL_DATASET_.xlsx")
+```
+
+The script will:
+1. Parse dates and create a Month_Year column
+2. Clean numeric columns (convert comma-decimal format to standard numeric)
+3. Map each city to its island group
+4. Impute missing daily values using each city's monthly average
+5. Aggregate to island-month level means for TN, TX, TAVG, and SS
+
+Output: a dataframe `final_island_air_quality` ready for analysis.
+
+---
+
+## Analyses
+
+Full results and visualizations are in `Air_Quality_Health_Analysis.pdf`. The project covers four main analyses:
+
+**1. Island-Specific Correlation Matrices**
+Pearson correlation heatmaps for each island, showing how temperature, humidity, and sunshine duration relate to pneumonia and TB case counts. Results varied considerably across islands, indicating that the climate-disease relationship is not uniform nationwide.
+
+**2. Spatio-Temporal Seasonal Trend Analysis**
+Line charts from mid-2024 to mid-2025 show that each island has a distinct seasonal disease peak driven by its own local weather cycle. Disease curves shift chronologically across the archipelago rather than peaking at the same time — a key finding that supports island-specific health planning.
+
+**3. Comparative Variance Analysis (ANOVA)**
+One-way ANOVA confirmed that baseline respiratory disease burden is statistically unequal across islands. Java carries a disproportionately high absolute burden compared to islands like Kalimantan, which makes equal national resource distribution an ineffective strategy.
+
+**4. PCA Clustering of Island Environmental-Health Profiles**
+PCA compressed all environmental and health variables into two dimensions (Dim1 explains 85.5% of variance). Java sits entirely isolated on the biplot, confirming that its urban density creates a health-climate profile unlike any other island. Sulawesi and Papua cluster closer together, reflecting shared coastal characteristics.
+
+---
+
+## Key Findings
+
+- Java's disease burden is statistically and visually distinct from all other islands due to high population density and urbanization.
+- Each island has its own seasonal disease peak, which shifts chronologically across the year as weather patterns move through the archipelago.
+- The drivers of respiratory disease differ between islands — a single national model cannot capture this variation.
+- Findings support dynamic, localized allocation of health resources rather than a uniform national approach.
