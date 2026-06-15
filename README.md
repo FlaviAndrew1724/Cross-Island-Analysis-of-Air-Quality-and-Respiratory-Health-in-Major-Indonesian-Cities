@@ -13,9 +13,9 @@ Indonesia's unique geography spans highly urbanized zones and dense forested are
 ## Repository Structure
 
 ```
-├── data/
-│   └── FINAL_DATASET_.xlsx              # Dataset used for analysis
-├── R/
+├── code/
+│   └── Final Project.R             # Code for analysis
+├── data preparation/
 │   └── Air_Quality_Data_Preparation.R   # Data cleaning and aggregation script
 ├── analysis/
 │   └── Air_Quality_Health_Analysis.pdf  # Full analysis report and visualizations
